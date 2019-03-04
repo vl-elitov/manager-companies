@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create company</div>
+                    <div class="panel-heading">Create company <a href="/dashboard" class="pull-right btn btn-default btn-xs">Go Back</a></div>
 
                     <div class="panel-body">
                         {!!Form::open(['action' => 'CompaniesController@store','method' => 'POST'])!!}
