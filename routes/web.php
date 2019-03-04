@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::resource('companies', 'CompaniesController');
+
+Route::get('/dashboard', 'CompaniesController@index')->name('dashboard');
