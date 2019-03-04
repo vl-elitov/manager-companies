@@ -18,7 +18,7 @@
                                 @foreach($companies as $company)
                                     <tr>
                                         <td>{{$company->name}}</td>
-                                        <td></td>
+                                        <td><a class="pull-right btn btn-default" href="/companies/{{$company->id}}/edit">Edit</a></td>
                                         <td></td>
                                     </tr>
                                 @endforeach

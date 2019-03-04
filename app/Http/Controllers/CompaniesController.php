@@ -88,7 +88,8 @@ class CompaniesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = Companies::find($id);
+        return view('companies.edit')->with('company', $company);
     }
 
     /**
@@ -97,10 +98,30 @@ class CompaniesController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'address' => 'required',
+            'website' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'bio' => 'required',
+        ]);
+        $company = Companies::find($id);
+
+        $company->name = $request->input('name');
+        $company->website = $request->input('website');
+        $company->email = $request->input('email');
+        $company->phone = $request->input('phone');
+        $company->address = $request->input('address');
+        $company->bio = $request->input('bio');
+
+        $company->save();
+
+        return redirect('/dashboard')->with('success', 'Company Updated');
     }
 
     /**
