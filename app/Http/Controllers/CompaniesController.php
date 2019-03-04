@@ -132,6 +132,8 @@ class CompaniesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $company = Companies::find($id);
+        $company->delete();
+        return redirect('/dashboard')->with('success', 'Company Deleted');
     }
 }
