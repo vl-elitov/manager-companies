@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Companies;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -34,18 +35,38 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'address' => 'required',
+            'website' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'bio' => 'required',
+        ]);
+        $company = new Companies;
+        $company->name = $request->input('name');
+        $company->website = $request->input('website');
+        $company->email = $request->input('email');
+        $company->phone = $request->input('phone');
+        $company->address = $request->input('address');
+        $company->bio = $request->input('bio');
+        $company->user_id = auth()->user()->id;
+
+        $company->save();
+
+        return redirect('/dashboard')->with('success', 'Company Added');
     }
 
     /**
