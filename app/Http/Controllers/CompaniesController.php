@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
 {
+
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     /**
@@ -25,7 +26,7 @@ class CompaniesController extends Controller
 
         $user = User::find($user_id);
 
-        return view('dashboard')->with('companies', $user->companies);
+        return view('companies.index')->with('companies', $user->companies);
     }
 
     /**
@@ -66,7 +67,7 @@ class CompaniesController extends Controller
 
         $company->save();
 
-        return redirect('/dashboard')->with('success', 'Company Added');
+        return redirect('/companies')->with('success', 'Company Added');
     }
 
     /**
@@ -77,7 +78,8 @@ class CompaniesController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = Companies::find($id);
+        return view('common.show')->with('company', $company);
     }
 
     /**

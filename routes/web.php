@@ -11,12 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DashboardController@index')->name('dashboard');
 
 Auth::routes();
 
 Route::resource('companies', 'CompaniesController');
 
-Route::get('/dashboard', 'CompaniesController@index')->name('dashboard');
+Route::get('/dashboard', 'CompaniesController@index');
